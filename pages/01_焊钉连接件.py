@@ -54,7 +54,7 @@ def set_background(image_name):
     )
 
 # ---------------- 调用背景图 ----------------
-set_background("../assets/1.jpg")  # 这里写你的图片名
+set_background("../1.jpg")  # 这里写你的图片名
 
 def load_model(model_filename):
     # 获取当前文件（即子页面 .py）的绝对路径
@@ -143,7 +143,7 @@ div[data-testid="stSuccess"] div[data-testid="stMarkdownContainer"] {
 st.title("焊钉连接件抗剪承载力预测平台 Prediction Platform for the Shear Bearing Capacity of Stud Connectors")
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(current_dir, "2.png")
+file_path = os.path.join(os.path.dirname(current_dir), "2.png")
 with open(file_path, "rb") as f:
     data = f.read()
 encoded = base64.b64encode(data).decode()
