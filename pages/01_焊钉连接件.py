@@ -54,11 +54,13 @@ def set_background(image_name):
     )
 
 # ---------------- 调用背景图 ----------------
-set_background("1.jpg")  # 这里写你的图片名
+set_background("../assets/1.jpg")  # 这里写你的图片名
 
 def load_model(model_filename):
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    model_path = os.path.join(base_dir, model_filename)
+    # 获取当前文件（即子页面 .py）的绝对路径
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # 向上跳一级到根目录，然后进入 models 文件夹
+    model_path = os.path.join(os.path.dirname(current_dir), "models", model_filename)
     
     if not os.path.exists(model_path):
         raise FileNotFoundError(f"{model_path} 不存在")
