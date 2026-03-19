@@ -199,8 +199,8 @@ dr = st.number_input("dr", min_value=0.0, max_value=28.0, step=1.0, label_visibi
 st.markdown('<p style="font-size:26px;">单侧焊钉总数 <i>n</i>', unsafe_allow_html=True)
 n = st.number_input("n", min_value=1.0, max_value=4.0, step=1.0, label_visibility="collapsed")
 
-st.markdown('<p style="font-size:26px;">焊钉直径 <i>a</i><sub>s</sub> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
-as = st.number_input("as", min_value=50.0, max_value=205.0, step=0.1, label_visibility="collapsed")
+st.markdown('<p style="font-size:26px;">连接件与混凝土端部的最小距离 <i>a</i><sub>s</sub> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
+as_val = st.number_input("as", min_value=50.0, max_value=205.0, step=0.1, label_visibility="collapsed")
 
 st.markdown('<p style="font-size:26px;">焊钉中与PBL孔中心横向间距(垂直于剪力方向) <i>h</i><sub>sp</sub> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
 hsp = st.number_input("dr", min_value=40.0, max_value=150.0, step=0.1, label_visibility="collapsed")
@@ -220,7 +220,7 @@ fyr = st.number_input("fyr", min_value=0.0, max_value=500.0, step=0.1, key="fsy"
 
 # 计算按钮
 if st.button("计算抗剪承载力"):
-    X = np.array([[ds, hs, dp, hp, dr, n, as, hsp, lsp, np, fcu, fyr]])
+    X = np.array([[ds, hs, dp, hp, dr, n, as_val, hsp, lsp, np, fcu, fyr]])
     y_pred = stud_PBL_model.predict(X)[0]
     
     st.success(f"预测抗剪承载力: {y_pred:.2f} kN")
