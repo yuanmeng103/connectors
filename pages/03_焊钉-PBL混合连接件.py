@@ -209,7 +209,7 @@ st.markdown('<p style="font-size:26px;">焊钉中与PBL孔中心横向间距(沿
 lsp = st.number_input("dr", min_value=40.0, max_value=120.0, step=0.1, label_visibility="collapsed")
 
 st.markdown('<p style="font-size:26px;">PBL开孔数量 <i>n</i><sub>p</sub>', unsafe_allow_html=True)
-np = st.number_input("np", min_value=1.0, max_value=0.0, step=1.0, label_visibility="collapsed")
+np = st.number_input("np", min_value=1.0, max_value=6.0, step=1.0, label_visibility="collapsed")
 
 st.markdown('<p style="font-size:26px;">混凝土立方体抗压强度 <i>f</i><sub>cu</sub> <span style="font-style:normal;">(MPa)</span></p>', unsafe_allow_html=True)
 fcu = st.number_input("fcu", min_value=30.0, max_value=85.0, step=0.1, key="fcu", label_visibility="collapsed")
