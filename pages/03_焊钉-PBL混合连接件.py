@@ -216,4 +216,5 @@ fyr = st.number_input("fyr", min_value=0.0, max_value=500.0, step=0.1, key="fsy"
 if st.button("计算抗剪承载力"):
     X = np.array([[ds, hs, dp, hp, dr, n, as, hsp, lsp, np, fcu, fyr]])
     y_pred = stud_PBL_model.predict(X)[0]
+    
     st.success(f"预测抗剪承载力: {y_pred:.2f} kN")
