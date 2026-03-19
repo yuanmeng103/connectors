@@ -54,11 +54,13 @@ def set_background(image_name):
     )
 
 # ---------------- 调用背景图 ----------------
-set_background("1.jpg")  # 这里写你的图片名
+set_background("../1.jpg")  # 这里写你的图片名
 
 def load_model(model_filename):
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    model_path = os.path.join(base_dir, model_filename)
+    # 获取当前文件（即子页面 .py）的绝对路径
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # 向上跳一级到根目录，然后进入 models 文件夹
+    model_path = os.path.join(os.path.dirname(current_dir), "models", model_filename)
     
     if not os.path.exists(model_path):
         raise FileNotFoundError(f"{model_path} 不存在")
@@ -140,7 +142,7 @@ div[data-testid="stSuccess"] div[data-testid="stMarkdownContainer"] {
 st.title("PBL连接件抗剪承载力预测平台 Prediction Platform for the Shear Bearing Capacity of PBL Connectors")
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(current_dir, "2.png")
+file_path = os.path.join(os.path.dirname(current_dir), "3.png")
 with open(file_path, "rb") as f:
     data = f.read()
 encoded = base64.b64encode(data).decode()
@@ -209,7 +211,7 @@ Bearing_Flag = st.number_input("Bearing_Flag", min_value=0, max_value=1, step=1,
 
 # 计算按钮
 if st.button("计算抗剪承载力"):
-        X = np.array([[d, n, t, h, fy, Ec, fcu, ds, fsy, Test_Type, Bearing_Flag]])
-        y_pred = PBL_model.predict(X)[0]
+    X = np.array([[d, n, t, h, fy, Ec, fcu, ds, fsy, Test_Type, Bearing_Flag]])
+    y_pred = PBL_model.predict(X)[0]
     
     st.success(f"预测抗剪承载力: {y_pred:.2f} kN")
