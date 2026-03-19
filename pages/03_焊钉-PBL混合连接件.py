@@ -54,7 +54,7 @@ def set_background(image_name):
     )
 
 # ---------------- 调用背景图 ----------------
-set_background("1.jpg")  # 这里写你的图片名
+set_background("../1.jpg")  # 这里写你的图片名
 
 def load_model(model_filename):
     # 获取当前文件（即子页面 .py）的绝对路径
