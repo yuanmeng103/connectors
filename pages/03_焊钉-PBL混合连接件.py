@@ -168,7 +168,7 @@ st.markdown(f"""
         基于机器学习算法（XGBoost），结合98个焊钉-PBL混合连接件有限元和推出试验数据库，
         部署为在线预测平台，
         该平台能够快速预测焊钉-PBL混合连接件的抗剪承载力。
-        用户只需输入几何与材料参数，即可获得预测结果。(注：无贯穿钢筋时，dr和fyr取0)
+        用户只需输入几何与材料参数，即可获得预测结果。(注：无贯穿钢筋时，<i>d</i><sub>r</sub> 和 <i>f</i><sub>yr</sub> 取 0)
     </div>
     <div style="flex: 0 0 260px; margin-left: 40px;">
         <img src="data:image/png;base64,{encoded}"

@@ -162,7 +162,7 @@ st.markdown(f"""
         基于机器学习算法（XGBoost），结合482个推出试验和插入试验的数据库，
         部署为在线预测平台，
         该平台能够快速预测PBL连接件的抗剪承载力。
-        用户只需输入几何与材料参数，即可获得预测结果。（注：试验类型：0-推出试验，1-插入试验；端部是否承压：0-端部不承压，1-端部承压。无贯穿钢筋时，ds和fsy取0）
+        用户只需输入几何与材料参数，即可获得预测结果。（注：试验类型：0-推出试验，1-插入试验；端部是否承压：0-端部不承压，1-端部承压。无贯穿钢筋时，<i>d</i><sub>s</sub> 和 <i>f</i><sub>sy</sub> 取 0）
     </div>
     <div style="flex: 0 0 260px; margin-left: 40px;">
         <img src="data:image/png;base64,{encoded}"
@@ -202,10 +202,10 @@ ds = st.number_input("ds", min_value=0.0, max_value=32.0, step=1.0, key="ds", la
 st.markdown('<p style="font-size:26px;">贯穿钢筋屈服强度 <i>f</i><sub>sy</sub> <span style="font-style:normal;">(MPa)</span></p>', unsafe_allow_html=True)
 fsy = st.number_input("fsy", min_value=0.0, max_value=500.0, step=0.1, key="fsy", label_visibility="collapsed")
 
-st.markdown('<p style="font-size:26px;">试验类型 <i>Test Type</i></p>', unsafe_allow_html=True)
+st.markdown('<p style="font-size:26px;">试验类型 Test Type</p>', unsafe_allow_html=True)
 Test_Type = st.number_input("Test_Type", min_value=0, max_value=1, step=1, key="test_type_input", label_visibility="collapsed")
 
-st.markdown('<p style="font-size:26px;">端部是否承压 <i>Test Type</i></p>', unsafe_allow_html=True)
+st.markdown('<p style="font-size:26px;">端部是否承压 Test Type</p>', unsafe_allow_html=True)
 Bearing_Flag = st.number_input("Bearing_Flag", min_value=0, max_value=1, step=1, key="Bearing_Flag_input", label_visibility="collapsed")
 
 
