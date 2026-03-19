@@ -141,11 +141,17 @@ div[data-testid="stSuccess"] div[data-testid="stMarkdownContainer"] {
 # 平台标题
 st.title("Stud-PBL混合连接件抗剪承载力预测平台 Prediction Platform for the Shear Bearing Capacity of Stud-PBL Hybrid Connectors")
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(os.path.dirname(current_dir), "4.png")
-with open(file_path, "rb") as f:
-    data = f.read()
-encoded = base64.b64encode(data).decode()
+curr_d = os.path.dirname(os.path.abspath(__file__))
+root_d = os.path.dirname(curr_d)
+f_ptr = os.path.join(root_d, "4.png")
+
+if os.path.exists(f_ptr):
+    with open(f_ptr, "rb") as f:
+        img_data = f.read()
+    encoded = base64.b64encode(img_data).decode()
+else:
+    st.error(f"找不到文件: {f_ptr}")
+    encoded = ""
 
 # --- 优雅布局 ---
 st.markdown(f"""
