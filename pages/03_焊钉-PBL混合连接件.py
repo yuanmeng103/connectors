@@ -185,19 +185,19 @@ st.markdown('<p style="font-size:26px;">焊钉直径 <i>d</i><sub>s</sub> <span 
 ds = st.number_input("ds", min_value=10.0, max_value=30.0, step=1.0, label_visibility="collapsed")
 
 st.markdown('<p style="font-size:26px;">焊钉高度 <i>h</i><sub>s</sub> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
-hs = st.number_input("hs", min_value=50.0, max_value=100.0, step=1.0, label_visibility="collapsed")
+hs = st.number_input("hs", min_value=50.0, max_value=300.0, step=1.0, label_visibility="collapsed")
 
 st.markdown('<p style="font-size:26px;">开孔直径 <i>d</i><sub>p</sub> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
 dp = st.number_input("dp", min_value=25.0, max_value=80.0, step=1.0, label_visibility="collapsed")
 
 st.markdown('<p style="font-size:26px;">开孔板高度 <i>h</i><sub>p</sub> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
-hp = st.number_input("dp", min_value=80.0, max_value=160.0, step=1.0, label_visibility="collapsed")
+hp = st.number_input("dp", min_value=80.0, max_value=200.0, step=1.0, label_visibility="collapsed")
 
 st.markdown('<p style="font-size:26px;">贯穿钢筋直径 <i>d</i><sub>r</sub> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
 dr = st.number_input("dr", min_value=0.0, max_value=28.0, step=1.0, label_visibility="collapsed")
 
 st.markdown('<p style="font-size:26px;">单侧焊钉总数 <i>n</i>', unsafe_allow_html=True)
-n = st.number_input("n", min_value=1.0, max_value=4.0, step=1.0, label_visibility="collapsed")
+n = st.number_input("n", min_value=1.0, max_value=10.0, step=1.0, label_visibility="collapsed")
 
 st.markdown('<p style="font-size:26px;">连接件与混凝土端部的最小距离 <i>a</i><sub>s</sub> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
 as_val = st.number_input("as", min_value=50.0, max_value=205.0, step=0.1, label_visibility="collapsed")
@@ -206,7 +206,7 @@ st.markdown('<p style="font-size:26px;">焊钉中与PBL孔中心横向间距(垂
 hsp = st.number_input("dr", min_value=40.0, max_value=400.0, step=0.1, label_visibility="collapsed")
 
 st.markdown('<p style="font-size:26px;">焊钉中与PBL孔中心横向间距(沿剪力方向) <i>l</i><sub>sp</sub> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
-lsp = st.number_input("dr", min_value=40.0, max_value=120.0, step=0.1, label_visibility="collapsed")
+lsp = st.number_input("dr", min_value=40.0, max_value=150.0, step=0.1, label_visibility="collapsed")
 
 st.markdown('<p style="font-size:26px;">PBL开孔数量 <i>n</i><sub>p</sub>', unsafe_allow_html=True)
 n_p = st.number_input("np", min_value=1.0, max_value=6.0, step=1.0, label_visibility="collapsed")
