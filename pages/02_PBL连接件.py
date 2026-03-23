@@ -185,7 +185,7 @@ st.markdown('<p style="font-size:26px;">开孔钢板厚度 <i>t</i> <span style=
 t = st.number_input("t", min_value=5.0, max_value=50.0, step=1.0, key="t", label_visibility="collapsed")
 
 st.markdown('<p style="font-size:26px;">开孔钢板高度 <i>h</i> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
-h = st.number_input("h", min_value=80.0, max_value=300.0, step=1.0, key="h", label_visibility="collapsed")
+h = st.number_input("h", min_value=80.0, max_value=500.0, step=1.0, key="h", label_visibility="collapsed")
 
 st.markdown('<p style="font-size:26px;">开孔钢板屈服强度 <i>f</i><sub>y</sub> <span style="font-style:normal;">(MPa)</span></p>', unsafe_allow_html=True)
 fy = st.number_input("fy", min_value=240.0, max_value=460.0, step=0.1, key="fy", label_visibility="collapsed")

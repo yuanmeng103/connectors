@@ -203,13 +203,13 @@ st.markdown('<p style="font-size:26px;">连接件与混凝土端部的最小距�
 as_val = st.number_input("as", min_value=50.0, max_value=205.0, step=0.1, label_visibility="collapsed")
 
 st.markdown('<p style="font-size:26px;">焊钉中与PBL孔中心横向间距(垂直于剪力方向) <i>h</i><sub>sp</sub> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
-hsp = st.number_input("dr", min_value=40.0, max_value=150.0, step=0.1, label_visibility="collapsed")
+hsp = st.number_input("dr", min_value=40.0, max_value=400.0, step=0.1, label_visibility="collapsed")
 
 st.markdown('<p style="font-size:26px;">焊钉中与PBL孔中心横向间距(沿剪力方向) <i>l</i><sub>sp</sub> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
 lsp = st.number_input("dr", min_value=40.0, max_value=120.0, step=0.1, label_visibility="collapsed")
 
 st.markdown('<p style="font-size:26px;">PBL开孔数量 <i>n</i><sub>p</sub>', unsafe_allow_html=True)
-np = st.number_input("np", min_value=1.0, max_value=6.0, step=1.0, label_visibility="collapsed")
+n_p = st.number_input("np", min_value=1.0, max_value=6.0, step=1.0, label_visibility="collapsed")
 
 st.markdown('<p style="font-size:26px;">混凝土立方体抗压强度 <i>f</i><sub>cu</sub> <span style="font-style:normal;">(MPa)</span></p>', unsafe_allow_html=True)
 fcu = st.number_input("fcu", min_value=30.0, max_value=85.0, step=0.1, key="fcu", label_visibility="collapsed")
@@ -220,7 +220,7 @@ fyr = st.number_input("fyr", min_value=0.0, max_value=500.0, step=0.1, key="fsy"
 
 # 计算按钮
 if st.button("计算抗剪承载力"):
-    X = np.array([[ds, hs, dp, hp, dr, n, as_val, hsp, lsp, np, fcu, fyr]])
+    X = np.array([[ds, hs, dp, hp, dr, n, as_val, hsp, lsp, n_p, fcu, fyr]])
     y_pred = stud_PBL_model.predict(X)[0]
     
     st.success(f"预测抗剪承载力: {y_pred:.2f} kN")
