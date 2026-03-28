@@ -201,50 +201,47 @@ col1, col2, col3 = st.columns(3)
 # --- 第一列 ---
 with col1:
     st.markdown(label_html("焊钉直径", "d", "s", "mm"), unsafe_allow_html=True)
-    ds = st.number_input("d_v", 10.0, 40.0, 22.0, label_visibility="collapsed")
+    ds = st.number_input("ds_v", 10.0, 40.0, 22.0, key="ds_k", label_visibility="collapsed")
     
     st.markdown(label_html("焊钉高度", "h", "s", "mm"), unsafe_allow_html=True)
-    hs = st.number_input("h_v", 50.0, 500.0, 200.0, label_visibility="collapsed")
+    hs = st.number_input("hs_v", 50.0, 500.0, 200.0, key="hs_k", label_visibility="collapsed")
 
     st.markdown(label_html("混凝土弹模", "E", "c", "GPa"), unsafe_allow_html=True)
-    Ec = st.number_input("Ec_v", 20.0, 60.0, 30.0, label_visibility="collapsed")
+    Ec = st.number_input("Ec_v", 20.0, 60.0, 30.0, key="Ec_k", label_visibility="collapsed")
 
     st.markdown(label_html("混凝土抗压强度", "f", "cu", "MPa"), unsafe_allow_html=True)
-    fcu = st.number_input("fcu_v", 20.0, 80.0, 50.0, label_visibility="collapsed")
+    fcu = st.number_input("fcu_v", 20.0, 80.0, 50.0, key="fcu_k", label_visibility="collapsed")
 
 # --- 第二列 ---
 with col2:
     st.markdown(label_html("焊钉屈服强度", "f", "ys", "MPa"), unsafe_allow_html=True)
-    fys = st.number_input("fys_v", 200.0, 700.0, 400.0, label_visibility="collapsed")
+    fys = st.number_input("fys_v", 200.0, 700.0, 400.0, key="fys_k", label_visibility="collapsed")
 
     st.markdown(label_html("焊钉抗拉强度", "f", "ts", "MPa"), unsafe_allow_html=True)
-    fts = st.number_input("fts_v", 200.0, 600.0, 450.0, label_visibility="collapsed")
+    fts = st.number_input("fts_v", 200.0, 600.0, 450.0, key="fts_k", label_visibility="collapsed")
 
+    # 只有是群钉模型时才显示的参数
     if model_type == "群钉模型":
         st.markdown(label_html("纵向间距", "l", "z", "mm"), unsafe_allow_html=True)
-        lz = st.number_input("lz_v", 0.0, 400.0, 100.0, label_visibility="collapsed")
+        lz = st.number_input("lz_v", 0.0, 400.0, 100.0, key="lz_k", label_visibility="collapsed")
 
-
-    if model_type == "群钉模型":
         st.markdown(label_html("焊钉层数", "n", "z", ""), unsafe_allow_html=True)
-        nz = st.number_input("nz_v", 0.0, 30.0, 2.0, label_visibility="collapsed")
+        nz = st.number_input("nz_v", 0.0, 30.0, 2.0, key="nz_k", label_visibility="collapsed")
+    else:
+        # 必须在这里初始化，否则单钉模型下 X 数组会找不到变量
+        lz, nz = None, None
 
 # --- 第三列 ---
 with col3:
     if model_type == "群钉模型":
-        st.markdown(label_html("焊钉层数", "n", "z", ""), unsafe_allow_html=True)
-        nz = st.number_input("nz_v", 0.0, 30.0, 2.0, label_visibility="collapsed")
-
-    if model_type == "群钉模型":
         st.markdown(label_html("横向间距", "l", "h", "mm"), unsafe_allow_html=True)
-        lh = st.number_input("lh_v", 0.0, 400.0, 80.0, label_visibility="collapsed")
+        lh = st.number_input("lh_v", 0.0, 400.0, 80.0, key="lh_k", label_visibility="collapsed")
 
-    if model_type == "群钉模型":
         st.markdown(label_html("焊钉列数", "n", "h", ""), unsafe_allow_html=True)
-        nh = st.number_input("nh_v", 0.0, 30.0, 2.0, label_visibility="collapsed")
-
-else:
-    lz, nz, lh, nh = None, None, None, None
+        nh = st.number_input("nh_v", 0.0, 30.0, 2.0, key="nh_k", label_visibility="collapsed")
+    else:
+        # 同理初始化
+        lh, nh = None, None
 
 st.write("---")
 
