@@ -180,43 +180,59 @@ model_type = st.selectbox(
     label_visibility="collapsed"  # 隐藏原 label
 )
 
-# 输入参数（论文风格下标）
+# --- 辅助函数：统一标签样式 ---
+def label_html(text, symbol, unit=""):
+    unit_str = f' <span style="font-style:normal;">({unit})</span>' if unit else ""
+    return f'<p style="font-size:20px; margin-bottom:-10px;">{text} <i>{symbol}</i>{unit_str}</p>'
+
 st.markdown("#### 输入参数")
 
-# 单钉参数
-st.markdown('<p style="font-size:26px;">焊钉直径 <i>d</i> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
-d = st.number_input("d", min_value=0.0, max_value=40.0, step=0.1, label_visibility="collapsed")
+# --- 第一部分：基础参数（单钉与材料） ---
+col1, col2, col3 = st.columns(3)
 
-st.markdown('<p style="font-size:26px;">焊钉高度 <i>h</i> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
-h = st.number_input("h", min_value=50.0, max_value=500.0, step=0.1, label_visibility="collapsed")
+with col1:
+    st.markdown(label_html("焊钉直径", "d", "mm"), unsafe_allow_html=True)
+    d = st.number_input("d_val", 0.0, 40.0, 22.0, 0.1, label_visibility="collapsed")
+    
+    st.markdown(label_html("混凝土抗压强度", "f", "cu", "MPa"), unsafe_allow_html=True)
+    fcu = st.number_input("fcu_val", 20.0, 80.0, 50.0, 1.0, label_visibility="collapsed")
 
-st.markdown('<p style="font-size:26px;">混凝土弹性模量 <i>E</i><sub>c</sub> <span style="font-style:normal;">(GPa)</span></p>', unsafe_allow_html=True)
-Ec = st.number_input("Ec", min_value=20.0, max_value=60.0, step=1.0, key="Ec", label_visibility="collapsed")
+with col2:
+    st.markdown(label_html("焊钉高度", "h", "mm"), unsafe_allow_html=True)
+    h = st.number_input("h_val", 50.0, 500.0, 200.0, 0.1, label_visibility="collapsed")
+    
+    st.markdown(label_html("钢材屈服强度", "f", "sy", "MPa"), unsafe_allow_html=True)
+    fsy = st.number_input("fsy_val", 200.0, 700.0, 400.0, 10.0, label_visibility="collapsed")
 
-st.markdown('<p style="font-size:26px;">混凝土立方体抗压强度 <i>f</i><sub>cu</sub> <span style="font-style:normal;">(MPa)</span></p>', unsafe_allow_html=True)
-fcu = st.number_input("fcu", min_value=20.0, max_value=80.0, step=1.0, key="fcu", label_visibility="collapsed")
+with col3:
+    st.markdown(label_html("混凝土弹模", "E", "c", "GPa"), unsafe_allow_html=True)
+    Ec = st.number_input("Ec_val", 20.0, 60.0, 30.0, 1.0, label_visibility="collapsed")
+    
+    st.markdown(label_html("钢材极限强度", "f", "su", "MPa"), unsafe_allow_html=True)
+    fsu = st.number_input("fsu_val", 200.0, 600.0, 450.0, 10.0, label_visibility="collapsed")
 
-st.markdown('<p style="font-size:26px;">焊钉钢材的屈服强度 <i>f</i><sub>sy</sub> <span style="font-style:normal;">(MPa)</span></p>', unsafe_allow_html=True)
-fsy = st.number_input("fsy", min_value=200.0, max_value=700.0, step=10.0, key="fsy", label_visibility="collapsed")
-
-st.markdown('<p style="font-size:26px;">焊钉钢材的极限抗拉强度 <i>f</i><sub>su</sub> <span style="font-style:normal;">(MPa)</span></p>', unsafe_allow_html=True)
-fsu = st.number_input("fsu", min_value=200.0, max_value=600.0, step=10.0, key="fsu", label_visibility="collapsed")
-
-# 群钉特有参数
+# --- 第二部分：群钉特有参数（动态显示） ---
 if model_type == "群钉模型":
-    st.markdown('<p style="font-size:26px;">纵向间距 <i>l</i><sub>z</sub> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
-    lz = st.number_input("lz", min_value=0.0, max_value=400.0, step=1.0, key="lz", label_visibility="collapsed")
+    st.markdown("---")
+    st.markdown("#### 📏 群钉布置参数")
+    g_col1, g_col2, g_col3, g_col4 = st.columns(4) # 群钉参数较简单，可以用四列
     
-    st.markdown('<p style="font-size:26px;">焊钉层数 <i>n</i><sub>z</sub> </p>', unsafe_allow_html=True)
-    nz = st.number_input("nz", min_value=0.0, max_value=30.0, step=1.0, key="nz", label_visibility="collapsed")
-    
-    st.markdown('<p style="font-size:26px;">横向间距 <i>l</i><sub>h</sub> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
-    lh = st.number_input("lh", min_value=0.0, max_value=400.0, step=1.0, key="lh", label_visibility="collapsed")
-
-    st.markdown('<p style="font-size:26px;">焊钉列数 <i>n</i><sub>h</sub> </p>', unsafe_allow_html=True)
-    nh = st.number_input("nh", min_value=0.0, max_value=30.0, step=1.0, key="nh", label_visibility="collapsed")
+    with g_col1:
+        st.markdown(label_html("纵向间距", "l", "z", "mm"), unsafe_allow_html=True)
+        lz = st.number_input("lz_val", 0.0, 400.0, 100.0, 1.0, label_visibility="collapsed")
+    with g_col2:
+        st.markdown(label_html("焊钉层数", "n", "z"), unsafe_allow_html=True)
+        nz = st.number_input("nz_val", 0.0, 30.0, 2.0, 1.0, label_visibility="collapsed")
+    with g_col3:
+        st.markdown(label_html("横向间距", "l", "h", "mm"), unsafe_allow_html=True)
+        lh = st.number_input("lh_val", 0.0, 400.0, 80.0, 1.0, label_visibility="collapsed")
+    with g_col4:
+        st.markdown(label_html("焊钉列数", "n", "h"), unsafe_allow_html=True)
+        nh = st.number_input("nh_val", 0.0, 30.0, 2.0, 1.0, label_visibility="collapsed")
 else:
     lz, nz, lh, nh = None, None, None, None
+
+st.write("---")
 
 # 计算按钮
 if st.button("计算抗剪承载力"):
