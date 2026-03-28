@@ -5,6 +5,8 @@ import numpy as np
 import base64
 import os
 
+st.set_page_config(layout="wide")
+
 def set_background(image_name):
     # 获取脚本所在目录
     current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -94,7 +96,7 @@ html, body, [class*="css"] {
 /* ---- 输入框区域 ---- */
 input, select, textarea, label, div, span {
     font-family: 'Times New Roman', 'SimSun', serif !important;
-    font-size: 24px !important;
+    font-size: 30px !important;
 }
 
 /* 参数说明与输入框间距 */
@@ -104,10 +106,11 @@ input, select, textarea, label, div, span {
 
 /* 输入框内部间距缩小 */
 .stNumberInput>div>div>div>input {
-    font-size: 24px !important;      /* 控制字体大小 */
-    padding: 6px 12px !important;    /* 控制内部上下左右间距 */
-    height: 48px !important; 
+    font-size: 28px !important;    /* 匹配上面的大小 */
+    height: 60px !important;       /* 字体变大后，高度也要相应增加，比如从 48px 改为 60px */
 }
+
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -115,8 +118,12 @@ st.markdown("""
 <style>
 /* ---- selectbox 高度和宽度 ---- */
 div[data-baseweb="select"] > div {
-    min-height: 50px !important;  /* 控制外框高度 */
-    width: 220px !important;      /* 控制宽度 */
+    min-height: 60px !important;  /* 增加高度 */
+    width: 300px !important;      /* 增加宽度，防止文字挤压 */
+}
+
+div[data-baseweb="select"] input {
+    font-size: 28px !important;   /* 增大字体 */
 }
 
 /* selectbox 显示区域字体和高度 */
@@ -191,7 +198,7 @@ def label_html(text, symbol="", subscript="", unit=""):
     """
     sub_str = f'<sub>{subscript}</sub>' if subscript else ""
     unit_str = f' <span style="font-style:normal;">({unit})</span>' if unit else ""
-    return f'<p style="font-size:20px; margin-bottom:-10px;">{text} <i>{symbol}</i>{sub_str}{unit_str}</p>'
+    return f'<p style="font-size:26px; margin-bottom:-10px; white-space:nowrap;">{text} <i>{symbol}</i>{sub_str}{unit_str}</p>'
 
 st.markdown("#### 输入参数")
 
