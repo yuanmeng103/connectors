@@ -181,9 +181,17 @@ model_type = st.selectbox(
 )
 
 # --- 辅助函数：统一标签样式 ---
-def label_html(text, symbol, unit=""):
+# 修改后的函数定义，支持 4 个参数：名称、主符号、下标、单位
+def label_html(text, symbol="", subscript="", unit=""):
+    """
+    text: 中文名称 (如: 开孔直径)
+    symbol: 主符号 (如: d)
+    subscript: 下标 (如: p)
+    unit: 单位 (如: mm)
+    """
+    sub_str = f'<sub>{subscript}</sub>' if subscript else ""
     unit_str = f' <span style="font-style:normal;">({unit})</span>' if unit else ""
-    return f'<p style="font-size:20px; margin-bottom:-10px;">{text} <i>{symbol}</i>{unit_str}</p>'
+    return f'<p style="font-size:20px; margin-bottom:-10px;">{text} <i>{symbol}</i>{sub_str}{unit_str}</p>'
 
 st.markdown("#### 输入参数")
 
@@ -191,25 +199,25 @@ st.markdown("#### 输入参数")
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.markdown(label_html("焊钉直径", "d", "mm"), unsafe_allow_html=True)
-    d = st.number_input("d_val", 0.0, 40.0, 22.0, 0.1, label_visibility="collapsed")
+    st.markdown(label_html("焊钉直径", "d", "s", "mm"), unsafe_allow_html=True)
+    ds = st.number_input("d_val", 0.0, 40.0, 22.0, 0.1, label_visibility="collapsed")
     
     st.markdown(label_html("混凝土抗压强度", "f", "cu", "MPa"), unsafe_allow_html=True)
     fcu = st.number_input("fcu_val", 20.0, 80.0, 50.0, 1.0, label_visibility="collapsed")
 
 with col2:
-    st.markdown(label_html("焊钉高度", "h", "mm"), unsafe_allow_html=True)
-    h = st.number_input("h_val", 50.0, 500.0, 200.0, 0.1, label_visibility="collapsed")
+    st.markdown(label_html("焊钉高度", "h", "s", "mm"), unsafe_allow_html=True)
+    hs = st.number_input("h_val", 50.0, 500.0, 200.0, 0.1, label_visibility="collapsed")
     
-    st.markdown(label_html("钢材屈服强度", "f", "sy", "MPa"), unsafe_allow_html=True)
-    fsy = st.number_input("fsy_val", 200.0, 700.0, 400.0, 10.0, label_visibility="collapsed")
+    st.markdown(label_html("钢材屈服强度", "f", "ys", "MPa"), unsafe_allow_html=True)
+    fys = st.number_input("fsy_val", 200.0, 700.0, 400.0, 10.0, label_visibility="collapsed")
 
 with col3:
     st.markdown(label_html("混凝土弹模", "E", "c", "GPa"), unsafe_allow_html=True)
     Ec = st.number_input("Ec_val", 20.0, 60.0, 30.0, 1.0, label_visibility="collapsed")
     
-    st.markdown(label_html("钢材极限强度", "f", "su", "MPa"), unsafe_allow_html=True)
-    fsu = st.number_input("fsu_val", 200.0, 600.0, 450.0, 10.0, label_visibility="collapsed")
+    st.markdown(label_html("钢材极限强度", "f", "ts", "MPa"), unsafe_allow_html=True)
+    fts = st.number_input("fsu_val", 200.0, 600.0, 450.0, 10.0, label_visibility="collapsed")
 
 # --- 第二部分：群钉特有参数（动态显示） ---
 if model_type == "群钉模型":
@@ -237,9 +245,9 @@ st.write("---")
 # 计算按钮
 if st.button("计算抗剪承载力"):
     if model_type == "单钉模型":
-        X = np.array([[d, h, Ec, fcu, fsy, fsu]])
+        X = np.array([[ds, hs, Ec, fcu, fys, fts]])
         y_pred = single_model.predict(X)[0]
     else:
-        X = np.array([[d, h, lz, nz, lh, nh, Ec, fcu, fsy, fsu]])
+        X = np.array([[ds, hs, lz, nz, lh, nh, Ec, fcu, fys, fts]])
         y_pred = group_model.predict(X)[0]
     st.success(f"预测抗剪承载力: {y_pred:.2f} kN")

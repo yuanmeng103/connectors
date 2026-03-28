@@ -174,11 +174,18 @@ st.markdown(f"""
 st.markdown("#### 输入参数")
 
 # 辅助函数：统一标签样式（调小了字号到 20px 以适应并排，原 26px 太大会撑破布局）
-def label_html(text, symbol="", unit=""):
-    symbol_str = f' <i>{symbol}</i>' if symbol else ""
+# 修改后的函数定义，支持 4 个参数：名称、主符号、下标、单位
+def label_html(text, symbol="", subscript="", unit=""):
+    """
+    text: 中文名称 (如: 开孔直径)
+    symbol: 主符号 (如: d)
+    subscript: 下标 (如: p)
+    unit: 单位 (如: mm)
+    """
+    sub_str = f'<sub>{subscript}</sub>' if subscript else ""
     unit_str = f' <span style="font-style:normal;">({unit})</span>' if unit else ""
-    return f'<p style="font-size:20px; margin-bottom:-10px;">{text}{symbol_str}{unit_str}</p>'
-
+    return f'<p style="font-size:20px; margin-bottom:-10px;">{text} <i>{symbol}</i>{sub_str}{unit_str}</p>'
+    
 st.markdown("#### 输入参数")
 
 # 创建两列
