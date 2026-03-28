@@ -186,37 +186,37 @@ col1, col2 = st.columns(2)
 
 with col1:
     # --- 左侧列：钢板与基本参数 ---
-    st.markdown(label_html("开孔直径", "d", "mm"), unsafe_allow_html=True)
-    d = st.number_input("d_val", 10.0, 100.0, 60.0, 0.1, label_visibility="collapsed")
+    st.markdown(label_html("开孔直径", "d", "p", "mm"), unsafe_allow_html=True)
+    dp = st.number_input("dp_val", 10.0, 100.0, 60.0, 0.1, label_visibility="collapsed")
 
     st.markdown(label_html("开孔钢板厚度", "t", "mm"), unsafe_allow_html=True)
     t = st.number_input("t_val", 5.0, 50.0, 20.0, 1.0, label_visibility="collapsed")
 
-    st.markdown(label_html("开孔钢板屈服强度", "f", "y", "MPa"), unsafe_allow_html=True)
-    fy = st.number_input("fy_val", 240.0, 460.0, 345.0, 0.1, label_visibility="collapsed")
+    st.markdown(label_html("开孔钢板屈服强度", "f", "yp", "MPa"), unsafe_allow_html=True)
+    fyp = st.number_input("fyp_val", 240.0, 460.0, 345.0, 0.1, label_visibility="collapsed")
 
     st.markdown(label_html("混凝土立方体抗压强度", "f", "cu", "MPa"), unsafe_allow_html=True)
     fcu = st.number_input("fcu_val", 20.0, 80.0, 50.0, 0.1, label_visibility="collapsed")
 
-    st.markdown(label_html("贯穿钢筋屈服强度", "f", "sy", "MPa"), unsafe_allow_html=True)
-    fsy = st.number_input("fsy_val", 0.0, 500.0, 400.0, 0.1, label_visibility="collapsed")
+    st.markdown(label_html("贯穿钢筋屈服强度", "f", "yr", "MPa"), unsafe_allow_html=True)
+    fyr = st.number_input("fyr_val", 0.0, 500.0, 400.0, 0.1, label_visibility="collapsed")
 
     st.markdown(label_html("端部是否承压", "Bearing Flag"), unsafe_allow_html=True)
     Bearing_Flag = st.number_input("Bearing_Flag_val", 0, 1, 0, 1, label_visibility="collapsed")
 
 with col2:
     # --- 右侧列：混凝土、钢筋与测试类型 ---
-    st.markdown(label_html("开孔数量", "n"), unsafe_allow_html=True)
-    n = st.number_input("n_val", 1.0, 10.0, 1.0, 1.0, label_visibility="collapsed")
+    st.markdown(label_html("开孔数量", "n", "p",), unsafe_allow_html=True)
+    n_p = st.number_input("n_val", 1.0, 10.0, 1.0, 1.0, label_visibility="collapsed")
 
-    st.markdown(label_html("开孔钢板高度", "h", "mm"), unsafe_allow_html=True)
-    h = st.number_input("h_val", 80.0, 500.0, 150.0, 1.0, label_visibility="collapsed")
+    st.markdown(label_html("开孔钢板高度", "h", "p", "mm"), unsafe_allow_html=True)
+    h_p = st.number_input("hp_val", 80.0, 500.0, 150.0, 1.0, label_visibility="collapsed")
 
     st.markdown(label_html("混凝土弹性模量", "E", "c", "GPa"), unsafe_allow_html=True)
     Ec = st.number_input("Ec_val", 15.0, 60.0, 30.0, 0.1, label_visibility="collapsed")
 
     st.markdown(label_html("贯穿钢筋直径", "d", "s", "mm"), unsafe_allow_html=True)
-    ds = st.number_input("ds_val", 0.0, 32.0, 20.0, 1.0, label_visibility="collapsed")
+    d_r = st.number_input("ds_val", 0.0, 32.0, 20.0, 1.0, label_visibility="collapsed")
 
     st.markdown(label_html("试验类型", "Test Type"), unsafe_allow_html=True)
     Test_Type = st.number_input("test_type_val", 0, 1, 0, 1, label_visibility="collapsed")
@@ -225,7 +225,7 @@ st.write("---")
 
 # 计算按钮
 if st.button("计算抗剪承载力"):
-    X = np.array([[d, n, t, h, fy, Ec, fcu, ds, fsy, Test_Type, Bearing_Flag]])
+    X = np.array([[d_p, n_p, t, h_p, fyp, Ec, fcu, d_r, fyr, Test_Type, Bearing_Flag]])
     y_pred = PBL_model.predict(X)[0]
     
     st.success(f"预测抗剪承载力: {y_pred:.2f} kN")
