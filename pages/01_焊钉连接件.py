@@ -169,13 +169,13 @@ st.markdown(f"""
     align-items: center;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 ">
-    <div style="flex: 1; font-size: 24px; line-height: 1.8; text-align: justify; color: #333;">
+    <div style="flex: 3; font-size: 24px; line-height: 1.8; text-align: justify; color: #333; padding-right: 30px;">
         基于机器学习算法（XGBoost），结合639个单钉推出试验和193个群钉推出试验的数据库，
         部署为在线预测平台，
         该平台能够快速预测单钉与群钉连接件的抗剪承载力。
         用户只需输入几何与材料参数，即可获得预测结果。
     </div>
-    <div style="flex: 0 0 260px; margin-left: 40px;">
+    <div style="flex: 2; text-align: center;">
         <img src="data:image/png;base64,{encoded}"
              style="width:100%; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.25);">
     </div>
