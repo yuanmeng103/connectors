@@ -109,8 +109,6 @@ input, select, textarea, label, div, span {
     font-size: 28px !important;    /* 匹配上面的大小 */
     height: 60px !important;       /* 字体变大后，高度也要相应增加，比如从 48px 改为 60px */
 }
-
-
 </style>
 """, unsafe_allow_html=True)
 
