@@ -153,25 +153,43 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(os.path.dirname(current_dir), "2.png")
-with open(file_path, "rb") as f:
-    data = f.read()
-encoded = base64.b64encode(data).decode()
+# 假设 2.png 和脚本在同一个文件夹
+file_path = os.path.join(current_dir, "2.png")
 
-# --- 优雅布局 A：黄金比例悬浮卡片 ---
-# --- 回退到最开始版本（图片加大至 320px） ---
+if os.path.exists(file_path):
+    with open(file_path, "rb") as f:
+        data = f.read()
+    encoded = base64.b64encode(data).decode()
+else:
+    # 如果找不到，尝试去上一层找（对应你之前的路径逻辑）
+    file_path_alt = os.path.join(os.path.dirname(current_dir), "2.png")
+    if os.path.exists(file_path_alt):
+        with open(file_path_alt, "rb") as f:
+            data = f.read()
+        encoded = base64.b64encode(data).decode()
+    else:
+        encoded = "" # 彻底找不到时留空，防止报错
+
+# --- 2. 界面布局 (回退到最稳版本并锁定图片宽度) ---
 st.markdown(f"""
 <div style="
     background-color: #f8f9fa;
     border-radius: 15px;
-    padding: 25px 30px;
+    padding: 25px 35px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     margin-bottom: 30px;
 ">
-    <div style="flex: 1; font-size: 24px; line-height: 1.8; text-align: justify; color: #333;">
+    <div style="
+        flex: 1; 
+        font-size: 24px; 
+        line-height: 1.8; 
+        text-align: justify; 
+        color: #333;
+        white-space: normal !important;
+    ">
         基于机器学习算法（XGBoost），结合 639 个单钉推出试验和 193 个群钉推出试验的数据库，
         部署为在线预测平台，该平台能够快速预测单钉与群钉连接件的抗剪承载力。
         用户只需输入几何与材料参数，即可获得预测结果。
@@ -183,6 +201,8 @@ st.markdown(f"""
     </div>
 </div>
 """, unsafe_allow_html=True)
+
+st.write("---")
 
 st.markdown('<p style="font-size:24px; font-weight:bold;">请选择模型类型：</p>', unsafe_allow_html=True)
 
