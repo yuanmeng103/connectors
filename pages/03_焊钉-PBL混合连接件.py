@@ -207,7 +207,7 @@ with col1:
     dr = st.number_input("dr_val", 0.0, 28.0, 20.0, step=1.0, key="dr_k", label_visibility="collapsed")
 
     # 4. 垂直剪力间距
-    st.markdown('<p style="font-size:26px; margin-bottom:-10px; white-space:nowrap;">垂直剪力间距 <i>h</i><sub>sp</sub> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
+    st.markdown('<p style="font-size:26px; margin-bottom:-10px; white-space:nowrap;">焊钉和PBL横向间距 <i>h</i><sub>sp</sub> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
     hsp = st.number_input("hsp_val", 40.0, 400.0, 100.0, step=0.1, key="hsp_k", label_visibility="collapsed")
 
 with col2:
@@ -224,7 +224,7 @@ with col2:
     n = st.number_input("n_val", 1.0, 10.0, 2.0, step=1.0, key="n_k", label_visibility="collapsed")
 
     # 8. 沿剪力方向间距
-    st.markdown('<p style="font-size:26px; margin-bottom:-10px; white-space:nowrap;">沿剪力方向间距 <i>l</i><sub>sp</sub> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
+    st.markdown('<p style="font-size:26px; margin-bottom:-10px; white-space:nowrap;">焊钉和PBL纵向间距 <i>l</i><sub>sp</sub> <span style="font-style:normal;">(mm)</span></p>', unsafe_allow_html=True)
     lsp = st.number_input("lsp_val", 40.0, 150.0, 80.0, step=0.1, key="lsp_k", label_visibility="collapsed")
 
 with col3:
@@ -233,15 +233,15 @@ with col3:
     n_p = st.number_input("np_val", 1.0, 6.0, 1.0, step=1.0, key="np_k", label_visibility="collapsed")
 
     # 10. 混凝土抗压强度
-    st.markdown('<p style="font-size:26px; margin-bottom:-10px; white-space:nowrap;">混凝土强度 <i>f</i><sub>cu</sub> <span style="font-style:normal;">(MPa)</span></p>', unsafe_allow_html=True)
+    st.markdown('<p style="font-size:26px; margin-bottom:-10px; white-space:nowrap;">混凝土立方体抗压强度 <i>f</i><sub>cu</sub> <span style="font-style:normal;">(MPa)</span></p>', unsafe_allow_html=True)
     fcu = st.number_input("fcu_val", 30.0, 85.0, 50.0, step=0.1, key="fcu_k", label_visibility="collapsed")
 
     # 11. 钢筋屈服强度
-    st.markdown('<p style="font-size:26px; margin-bottom:-10px; white-space:nowrap;">钢筋强度 <i>f</i><sub>yr</sub> <span style="font-style:normal;">(MPa)</span></p>', unsafe_allow_html=True)
+    st.markdown('<p style="font-size:26px; margin-bottom:-10px; white-space:nowrap;">钢筋屈服强度 <i>f</i><sub>yr</sub> <span style="font-style:normal;">(MPa)</span></p>', unsafe_allow_html=True)
     fyr = st.number_input("fyr_val", 0.0, 500.0, 400.0, step=0.1, key="fyr_k", label_visibility="collapsed")
 
     # 12. 端部是否承压
-    st.markdown('<p style="font-size:26px; margin-bottom:-10px; white-space:nowrap;">端部是否承压 Test Type</p>', unsafe_allow_html=True)
+    st.markdown('<p style="font-size:26px; margin-bottom:-10px; white-space:nowrap;">端部是否承压  Bearing_Flag</p>', unsafe_allow_html=True)
     Bearing_Flag = st.number_input("Bearing_Flag_input", 0, 1, 0, step=1, key="flag_k", label_visibility="collapsed")
 
 st.write("---")
