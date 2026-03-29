@@ -90,7 +90,7 @@ html, body, [class*="css"] {
 
 /* 平台说明文字 */
 .stMarkdown div[style*="line-height"] {
-    font-size: 24px !important;
+    font-size: 26px !important;
 }
 
 /* ---- 输入框区域 ---- */
