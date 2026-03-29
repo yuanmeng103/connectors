@@ -152,25 +152,27 @@ st.markdown("""
     </h1>
     """, unsafe_allow_html=True)
 
+# --- 1. 图片处理逻辑 (放在代码上方) ---
+import base64
+import os
+
+# 获取路径并尝试读取图片
 current_dir = os.path.dirname(os.path.abspath(__file__))
-# 假设 2.png 和脚本在同一个文件夹
-file_path = os.path.join(current_dir, "2.png")
+# 尝试在 pages 目录或根目录寻找 2.png
+paths_to_try = [
+    os.path.join(current_dir, "2.png"),
+    os.path.join(os.path.dirname(current_dir), "2.png")
+]
 
-if os.path.exists(file_path):
-    with open(file_path, "rb") as f:
-        data = f.read()
-    encoded = base64.b64encode(data).decode()
-else:
-    # 如果找不到，尝试去上一层找（对应你之前的路径逻辑）
-    file_path_alt = os.path.join(os.path.dirname(current_dir), "2.png")
-    if os.path.exists(file_path_alt):
-        with open(file_path_alt, "rb") as f:
-            data = f.read()
-        encoded = base64.b64encode(data).decode()
-    else:
-        encoded = "" # 彻底找不到时留空，防止报错
+encoded_img = ""
+for p in paths_to_try:
+    if os.path.exists(p):
+        with open(p, "rb") as f:
+            encoded_img = base64.b64encode(f.read()).decode()
+        break
 
-# --- 2. 界面布局 (回退到最稳版本并锁定图片宽度) ---
+# --- 2. 界面展示布局 (核心修复) ---
+# 注意：使用 div 而非 p 标签，并强制 white-space 为 normal 解决竖排问题
 st.markdown(f"""
 <div style="
     background-color: #f8f9fa;
@@ -196,7 +198,7 @@ st.markdown(f"""
     </div>
     
     <div style="flex: 0 0 320px; margin-left: 40px; text-align: right;">
-        <img src="data:image/png;base64,{encoded}" 
+        <img src="data:image/png;base64,{encoded_img}" 
              style="width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
     </div>
 </div>
