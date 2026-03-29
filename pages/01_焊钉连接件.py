@@ -158,26 +158,33 @@ with open(file_path, "rb") as f:
     data = f.read()
 encoded = base64.b64encode(data).decode()
 
-# --- 优雅布局 ---
+# --- 优雅布局 A：黄金比例悬浮卡片 ---
 st.markdown(f"""
 <div style="
-    background-color: #f8f9fa;
-    border-radius: 15px;
-    padding: 25px 30px;
+    background-color: #fcfcfc;  /* 极浅灰背景，更显高级 */
+    border-radius: 20px;
+    padding: 30px 40px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    align-items: center;  /* 垂直居中 */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* 更柔和的大阴影 */
+    margin-bottom: 30px;
 ">
-    <div style="flex: 3; font-size: 24px; line-height: 1.8; text-align: justify; color: #333; padding-right: 30px;">
+    <div style="flex: 1.6; font-size: 26px; line-height: 1.8; text-align: justify; color: #333; padding-right: 40px;">
         基于机器学习算法（XGBoost），结合639个单钉推出试验和193个群钉推出试验的数据库，
         部署为在线预测平台，
         该平台能够快速预测单钉与群钉连接件的抗剪承载力。
         用户只需输入几何与材料参数，即可获得预测结果。
     </div>
-    <div style="flex: 2; text-align: center;">
+    <div style="flex: 1; text-align: center;">
         <img src="data:image/png;base64,{encoded}"
-             style="width:100%; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.25);">
+             style="
+                width: 100%;       /* 填满卡片区域 */
+                max-width: 480px;  /* 设置一个最大宽度，防止宽屏下大得离谱 */
+                border-radius: 15px;
+                border: 4px solid #fff; /* 增加白色边框，增加层次感 */
+                box-shadow: 0 8px 20px rgba(0,0,0,0.2); /* 图片单独的阴影 */
+             ">
     </div>
 </div>
 """, unsafe_allow_html=True)
