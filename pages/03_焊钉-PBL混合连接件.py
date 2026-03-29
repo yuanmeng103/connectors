@@ -144,7 +144,12 @@ div[data-testid="stSuccess"] div[data-testid="stMarkdownContainer"] {
 """, unsafe_allow_html=True)
 
 # 平台标题
-st.title("Stud-PBL混合连接件抗剪承载力预测平台 Prediction Platform for the Shear Bearing Capacity of Stud-PBL Hybrid Connectors")
+st.markdown("""
+    <h1 style='text-align: center; line-height: 1.2;'>
+        焊钉连接件抗剪承载力预测平台<br>
+        <span style='font-size: 26px; font-weight: normal;'>Prediction Platform for the Shear Bearing Capacity of Stud Connectors</span>
+    </h1>
+    """, unsafe_allow_html=True)
 
 curr_d = os.path.dirname(os.path.abspath(__file__))
 root_d = os.path.dirname(curr_d)
@@ -173,7 +178,7 @@ st.markdown(f"""
         基于机器学习算法（XGBoost），结合98个焊钉-PBL混合连接件有限元和推出试验数据库，
         部署为在线预测平台，
         该平台能够快速预测焊钉-PBL混合连接件的抗剪承载力。
-        用户只需输入几何与材料参数，即可获得预测结果。(注：无贯穿钢筋时，<i>d</i><sub>r</sub> 和 <i>f</i><sub>yr</sub> 取 0)
+        用户只需输入几何与材料参数，即可获得预测结果。(注：端部是否承压：0-端部不承压，1-端部承压。无贯穿钢筋时，<i>d</i><sub>r</sub> 和 <i>f</i><sub>yr</sub> 取 0)
     </div>
     <div style="flex: 0 0 260px; margin-left: 40px;">
         <img src="data:image/png;base64,{encoded}"
@@ -236,7 +241,7 @@ with col3:
     fyr = st.number_input("fyr_val", 0.0, 500.0, 400.0, step=0.1, key="fyr_k", label_visibility="collapsed")
 
     # 12. 端部是否承压
-    st.markdown('<p style="font-size:26px; margin-bottom:-10px; white-space:nowrap;">端部承压 Test Type</p>', unsafe_allow_html=True)
+    st.markdown('<p style="font-size:26px; margin-bottom:-10px; white-space:nowrap;">端部是否承压 Test Type</p>', unsafe_allow_html=True)
     Bearing_Flag = st.number_input("Bearing_Flag_input", 0, 1, 0, step=1, key="flag_k", label_visibility="collapsed")
 
 st.write("---")
