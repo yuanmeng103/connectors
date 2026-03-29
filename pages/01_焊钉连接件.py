@@ -162,33 +162,27 @@ encoded = base64.b64encode(data).decode()
 # --- 回退到最开始版本（图片加大至 320px） ---
 st.markdown(f"""
 <div style="
-    background-color: #f8f9fa;  /* 保持最开始的浅灰白色 */
+    background-color: #f8f9fa;
     border-radius: 15px;
     padding: 25px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    margin-bottom: 30px;  /* 增加底部间距 */
+    margin-bottom: 30px;
 ">
     <div style="flex: 1; font-size: 24px; line-height: 1.8; text-align: justify; color: #333;">
         基于机器学习算法（XGBoost），结合 639 个单钉推出试验和 193 个群钉推出试验的数据库，
-        部署为在线预测平台，
-        该平台能够快速预测单钉与群钉连接件的抗剪承载力。
-        用户只需输入几何与材料参数，即可实时获得预测结果。
+        部署为在线预测平台，该平台能够快速预测单钉与群钉连接件的抗剪承载力。
+        用户只需输入几何与材料参数，即可获得预测结果。
     </div>
     
     <div style="flex: 0 0 320px; margin-left: 40px; text-align: right;">
-        <img src="data:image/png;base64,{encoded}"
-             style="
-                width: 100%;       /* 填满 320px 的容器 */
-                border-radius: 12px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-             ">
+        <img src="data:image/png;base64,{encoded}" 
+             style="width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
     </div>
 </div>
 """, unsafe_allow_html=True)
-st.write("---")
 
 st.markdown('<p style="font-size:24px; font-weight:bold;">请选择模型类型：</p>', unsafe_allow_html=True)
 
