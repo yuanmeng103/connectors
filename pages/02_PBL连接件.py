@@ -195,8 +195,6 @@ def label_html(text, symbol="", subscript="", unit=""):
     sub_str = f'<sub>{subscript}</sub>' if subscript else ""
     unit_str = f' <span style="font-style:normal;">({unit})</span>' if unit else ""
     return f'<p style="font-size:26px; margin-bottom:-10px;">{text} <i>{symbol}</i>{sub_str}{unit_str}</p>'
-    
-st.markdown("#### 输入参数")
 
 # --- 开启三列布局 ---
 col1, col2, col3 = st.columns(3)
