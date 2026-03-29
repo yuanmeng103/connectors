@@ -159,38 +159,42 @@ with open(file_path, "rb") as f:
 encoded = base64.b64encode(data).decode()
 
 # --- 优雅布局 A：黄金比例悬浮卡片 ---
+# --- 极致精细布局 ---
 st.markdown(f"""
 <div style="
-    background-color: #fcfcfc;    /* 极浅灰背景，更显高级 */
-    border-radius: 24px;         /* 更大的圆角 */
-    padding: 40px 50px;          /* 增加内边距，给视觉呼吸空间 */
+    background-color: rgba(255, 255, 255, 0.85); /* 稍微透明一点，能透出背景图，增加高级感 */
+    border-radius: 20px;
+    padding: 35px 50px;
     display: flex;
     justify-content: space-between;
-    align-items: center;         /* 垂直居中 */
-    box-shadow: 0 15px 45px rgba(0,0,0,0.06); /* 更柔和、更大范围的浮雕阴影 */
-    margin-bottom: 40px;         /* 与下方参数区域拉开距离 */
-    border: 1px solid rgba(0,0,0,0.03); /* 极淡的边框，增加精致感 */
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    margin-bottom: 40px;
+    border: 1px solid rgba(255,255,255,0.5);
 ">
-    <div style="flex: 1.6; font-size: 26px; line-height: 1.8; text-align: justify; color: #333; padding-right: 50px;">
-        基于机器学习算法（XGBoost），结合639个单钉推出试验和193个群钉推出试验的数据库，
-        部署为在线预测平台，
-        该平台能够快速预测单钉与群钉连接件的抗剪承载力。
-        <span style="color: #666; font-size: 24px;"><br>用户只需输入几何与材料参数，即可获得预测结果。</span>
+    <div style="flex: 2; padding-right: 40px;">
+        <div style="font-size: 30px; font-weight: bold; color: #1e3a8a; margin-bottom: 15px; font-family: 'SimSun', serif;">
+        </div>
+        <div style="font-size: 24px; line-height: 1.7; text-align: justify; color: #333;">
+            基于机器学习算法（<strong>XGBoost</strong>），结合 639 个单钉推出试验和 193 个群钉推出试验的数据库，部署为在线预测平台。该平台能够快速预测单钉与群钉连接件的抗剪承载力。
+        </div>
+        <div style="font-size: 24px; color: #666; margin-top: 15px; font-style: italic;">
+            用户只需输入几何与材料参数，即可实时获得预测结果。
+        </div>
     </div>
-    <div style="flex: 1; text-align: center;">
+    
+    <div style="flex: 0.8; text-align: right;">
         <img src="data:image/png;base64,{encoded}"
              style="
-                width: 100%;       /* 填满卡片区域 */
-                max-width: 480px;  /* 设置最大宽度，防止全屏模式下过大 */
-                border-radius: 18px;
-                border: 6px solid #fff; /* 增加精致的白色边框，像个相框 */
-                box-shadow: 0 10px 25px rgba(0,0,0,0.18); /* 图片单独的柔和阴影 */
-                transition: transform 0.3s ease; /* 增加鼠标悬停动画（虽然网页上用不到，但CSS里加上更完整） */
+                width: 100%;
+                max-width: 280px;  /* 限制图片最大宽度，让它显得精致 */
+                border-radius: 12px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                border: 2px solid #fff;
              ">
     </div>
 </div>
 """, unsafe_allow_html=True)
-st.write("---")
 
 st.markdown('<p style="font-size:24px; font-weight:bold;">请选择模型类型：</p>', unsafe_allow_html=True)
 
