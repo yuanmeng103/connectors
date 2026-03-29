@@ -56,7 +56,7 @@ def set_background(image_name):
     )
 
 # ---------------- 调用背景图 ----------------
-set_background("../1.jpg")  # 这里写你的图片名
+set_background("../1.png")  # 这里写你的图片名
 
 def load_model(model_filename):
     # 获取当前文件（即子页面 .py）的绝对路径
@@ -144,7 +144,12 @@ div[data-testid="stSuccess"] div[data-testid="stMarkdownContainer"] {
 """, unsafe_allow_html=True)
 
 # 平台标题
-st.title("PBL连接件抗剪承载力预测平台 Prediction Platform for the Shear Bearing Capacity of PBL Connectors")
+st.markdown("""
+    <h1 style='text-align: center; line-height: 1.2;'>
+        PBL连接件抗剪承载力预测平台<br>
+        <span style='font-size: 26px; font-weight: normal;'>Prediction Platform for the Shear Bearing Capacity of PBL Connectors</span>
+    </h1>
+    """, unsafe_allow_html=True)
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 file_path = os.path.join(os.path.dirname(current_dir), "3.png")
