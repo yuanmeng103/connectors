@@ -152,59 +152,34 @@ st.markdown("""
     </h1>
     """, unsafe_allow_html=True)
 
-# --- 1. 图片处理逻辑 (放在代码上方) ---
-import base64
-import os
-
-# 获取路径并尝试读取图片
 current_dir = os.path.dirname(os.path.abspath(__file__))
-# 尝试在 pages 目录或根目录寻找 2.png
-paths_to_try = [
-    os.path.join(current_dir, "2.png"),
-    os.path.join(os.path.dirname(current_dir), "2.png")
-]
+file_path = os.path.join(os.path.dirname(current_dir), "2.png")
+with open(file_path, "rb") as f:
+    data = f.read()
+encoded = base64.b64encode(data).decode()
 
-encoded_img = ""
-for p in paths_to_try:
-    if os.path.exists(p):
-        with open(p, "rb") as f:
-            encoded_img = base64.b64encode(f.read()).decode()
-        break
-
-# --- 2. 界面展示布局 (核心修复) ---
-# 注意：使用 div 而非 p 标签，并强制 white-space 为 normal 解决竖排问题
+# --- 优雅布局 ---
 st.markdown(f"""
 <div style="
     background-color: #f8f9fa;
     border-radius: 15px;
-    padding: 25px 35px;
+    padding: 25px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
 ">
-    <div style="
-        flex: 1; 
-        font-size: 24px; 
-        line-height: 1.8; 
-        text-align: justify; 
-        color: #333;
-        white-space: normal !important;
-    ">
+    <div style="flex: 1; font-size: 24px; line-height: 1.8; text-align: justify; color: #333;">
         基于机器学习算法（XGBoost），结合 639 个单钉推出试验和 193 个群钉推出试验的数据库，
         部署为在线预测平台，该平台能够快速预测单钉与群钉连接件的抗剪承载力。
-        用户只需输入几何与材料参数，即可获得预测结果。
+        用户只需输入几何与材料参数，即可获得预测结果。   
     </div>
-    
-    <div style="flex: 0 0 320px; margin-left: 40px; text-align: right;">
-        <img src="data:image/png;base64,{encoded_img}" 
-             style="width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
+    <div style="flex: 0 0 260px; margin-left: 40px;">
+        <img src="data:image/png;base64,{encoded}"
+             style="width:100%; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.25);">
     </div>
 </div>
 """, unsafe_allow_html=True)
-
-st.write("---")
 
 st.markdown('<p style="font-size:24px; font-weight:bold;">请选择模型类型：</p>', unsafe_allow_html=True)
 
