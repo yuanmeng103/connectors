@@ -41,7 +41,7 @@ def set_background(image_name):
         )
 
 # 调用背景 (确保 assets 文件夹里有这幅图)
-set_background("1.jpg")
+set_background("1.png")
 
 # 3. 主页标题与欢迎语
 st.markdown("""
