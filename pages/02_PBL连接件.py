@@ -235,7 +235,7 @@ with col2:
 
 with col3:
     # 9. 贯穿钢筋直径
-    st.markdown(label_html("钢筋直径", "d", "s", "mm"), unsafe_allow_html=True)
+    st.markdown(label_html("钢筋直径", "d", "r", "mm"), unsafe_allow_html=True)
     d_r = st.number_input("ds_val", 0.0, 32.0, 20.0, 1.0, key="pbl_ds", label_visibility="collapsed")
 
     # 10. 试验类型 (直接把 Test Type 放在符号位)
