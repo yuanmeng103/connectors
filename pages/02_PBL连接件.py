@@ -249,7 +249,7 @@ with col3:
 st.write("---")
 # 计算按钮
 if st.button("计算抗剪承载力"):
-    X = np.array([[d_p, n_p, t, h_p, fyp, Ec, fcu, d_r, fyr, Test_Type, Bearing_Flag]])
+    X = np.array([[dp, n_p, t, h_p, fyp, Ec, fcu, d_r, fyr, Test_Type, Bearing_Flag]])
     y_pred = PBL_model.predict(X)[0]
     
     st.success(f"预测抗剪承载力: {y_pred:.2f} kN")
