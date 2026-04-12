@@ -239,11 +239,11 @@ with col3:
     d_r = st.number_input("ds_val", 0.0, 32.0, 20.0, 1.0, key="pbl_ds", label_visibility="collapsed")
 
     # 10. 试验类型 (直接把 Test Type 放在符号位)
-    st.markdown(label_html("试验类型", "Test Type", "", ""), unsafe_allow_html=True)
+    st.markdown(label_html("试验类型", "<span style='font-style:normal;'>Test Type</span>", "", ""), unsafe_allow_html=True
     Test_Type = st.number_input("test_type_val", 0, 1, 0, 1, key="pbl_tt", label_visibility="collapsed")
 
     # 11. 端部是否承压 (直接把 Bearing Flag 放在符号位)
-    st.markdown(label_html("端部是否承压", "Bearing Flag", "", ""), unsafe_allow_html=True)
+    st.markdown(label_html("端部是否承压", "<span style='font-style:normal;'> Bearing Flag</span>", "", ""), unsafe_allow_html=True
     Bearing_Flag = st.number_input("Bearing_Flag_val", 0, 1, 0, 1, key="pbl_bf", label_visibility="collapsed")
 
 st.write("---")
