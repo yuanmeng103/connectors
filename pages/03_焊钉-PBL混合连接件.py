@@ -231,7 +231,7 @@ with col2:
 with col3:
     # 9. PBL开孔数量
     st.markdown('<p style="font-size:26px; margin-bottom:-10px; white-space:nowrap;">PBL开孔数量 <i>n</i><sub>p</sub></p>', unsafe_allow_html=True)
-    n_p = st.number_input("np_val", 1.0, 6.0, 1.0, step=1.0, key="np_k", label_visibility="collapsed")
+    np = st.number_input("np_val", 1.0, 6.0, 1.0, step=1.0, key="np_k", label_visibility="collapsed")
 
     # 10. 混凝土抗压强度
     st.markdown('<p style="font-size:26px; margin-bottom:-10px; white-space:nowrap;">混凝土立方体抗压强度 <i>f</i><sub>cu</sub> <span style="font-style:normal;">(MPa)</span></p>', unsafe_allow_html=True)
@@ -250,10 +250,10 @@ st.write("---")
 # 计算按钮
 if st.button("计算抗剪承载力"):
     # 1. 显式定义特征列名，必须和 Excel 表头完全一致
-    cols = ['ds', 'hs', 'dp', 'hp', 'dr', 'n', 'hsp', 'lsp', 'n_p', 'fcu', 'fyr', 'Bearing_Flag']
+    cols = ['ds', 'hs', 'dp', 'hp', 'dr', 'n', 'hsp', 'lsp', 'np', 'fcu', 'fyr', 'Bearing_Flag']
     
     # 2. 构造 DataFrame (这样模型会按名字认人，不按排队顺序)
-    X_input = pd.DataFrame([[ds, hs, dp, hp, dr, n, hsp, lsp, n_p, fcu, fyr, Bearing_Flag]], 
+    X_input = pd.DataFrame([[ds, hs, dp, hp, dr, n, hsp, lsp, np, fcu, fyr, Bearing_Flag]], 
                            columns=cols)
     
     # 3. 调试：看看传进去的到底长啥样
