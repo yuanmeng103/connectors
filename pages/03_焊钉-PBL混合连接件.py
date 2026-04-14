@@ -248,16 +248,16 @@ st.write("---")
 
 # 计算按钮
 if st.button("计算抗剪承载力"):
-    # 测试 1：输入 0 时的预测
-    X_0 = np.array([[ds, hs, dp, hp, dr, n, hsp, lsp, n_p, fcu, fyr, 0.0]])
-    res_0 = stud_PBL_model.predict(X_0)[0]
+    # 1. 显式定义特征列名，必须和 Excel 表头完全一致
+    cols = ['ds', 'hs', 'dp', 'hp', 'dr', 'n', 'hsp', 'lsp', 'n_p', 'fcu', 'fyr', 'Bearing_Flag']
     
-    # 测试 2：输入 1 时的预测
-    X_1 = np.array([[ds, hs, dp, hp, dr, n, hsp, lsp, n_p, fcu, fyr, 1.0]])
-    res_1 = stud_PBL_model.predict(X_1)[0]
+    # 2. 构造 DataFrame (这样模型会按名字认人，不按排队顺序)
+    X_input = pd.DataFrame([[ds, hs, dp, hp, dr, n, hsp, lsp, n_p, fcu, fyr, Bearing_Flag]], 
+                           columns=cols)
     
-    st.write(f"调试：强制不承压结果 = {res_0:.4f}")
-    st.write(f"调试：强制承压结果 = {res_1:.4f}")
+    # 3. 调试：看看传进去的到底长啥样
+    # st.write(X_input) 
     
-    if res_0 == res_1:
-        st.error("警告：模型对该特征输出完全一致，请检查特征顺序或模型版本！")
+    # 4. 预测
+    y_pred = stud_PBL_model.predict(X_input)[0]
+    st.success(f"预测抗剪承载力: {y_pred:.2f} kN")
