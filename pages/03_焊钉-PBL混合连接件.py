@@ -4,6 +4,7 @@ import xgboost as xgb
 import numpy as np
 import base64
 import os
+import pandas as pd
 
 st.set_page_config(layout="wide")
 
