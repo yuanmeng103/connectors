@@ -219,7 +219,7 @@ with col1:
 with col2:
     # 5. 开孔数量
     st.markdown(label_html("开孔数量", "n", "p", ""), unsafe_allow_html=True)
-    np = st.number_input("n_val", 1.0, 10.0, 1.0, 1.0, key="pbl_np", label_visibility="collapsed")
+    n_p = st.number_input("n_val", 1.0, 10.0, 1.0, 1.0, key="pbl_np", label_visibility="collapsed")
 
     # 6. 钢板高度
     st.markdown(label_html("PBL板高度", "h", "p", "mm"), unsafe_allow_html=True)
@@ -247,9 +247,16 @@ with col3:
     Bearing_Flag = st.number_input("Bearing_Flag_val", 0, 1, 0, 1, key="pbl_bf", label_visibility="collapsed")
 
 st.write("---")
-# 计算按钮
 if st.button("计算抗剪承载力"):
-    X = np.array([[dp, np, t, hp, fyp, Ec, fcu, dr, fyr, Test_Type, Bearing_Flag]])
-    y_pred = PBL_model.predict(X)[0]
+    # 2. 定义模型训练时真正的特征名称 (必须和模型中的 np 一致)
+    cols = ['dp', 'np', 't', 'hp', 'fyp', 'Ec', 'fcu', 'dr', 'fyr', 'Test_Type', 'Bearing_Flag']
     
+    # 3. 将你的变量 n_p 对应到列名 'np' 上
+    vals = [dp, n_p, t, hp, fyp, Ec, fcu, dr, fyr, Test_Type, Bearing_Flag]
+    
+    # 4. 构造 DataFrame，此时 columns 里的 'np' 会让模型找到它
+    X_input = pd.DataFrame([vals], columns=cols)
+    
+    # 5. 预测
+    y_pred = PBL_model.predict(X_input)[0]
     st.success(f"预测抗剪承载力: {y_pred:.2f} kN")
