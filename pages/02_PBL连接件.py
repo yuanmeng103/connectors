@@ -219,11 +219,11 @@ with col1:
 with col2:
     # 5. 开孔数量
     st.markdown(label_html("开孔数量", "n", "p", ""), unsafe_allow_html=True)
-    n_p = st.number_input("n_val", 1.0, 10.0, 1.0, 1.0, key="pbl_np", label_visibility="collapsed")
+    np = st.number_input("n_val", 1.0, 10.0, 1.0, 1.0, key="pbl_np", label_visibility="collapsed")
 
     # 6. 钢板高度
     st.markdown(label_html("PBL板高度", "h", "p", "mm"), unsafe_allow_html=True)
-    h_p = st.number_input("hp_val", 80.0, 500.0, 150.0, 1.0, key="pbl_hp", label_visibility="collapsed")
+    hp = st.number_input("hp_val", 80.0, 500.0, 150.0, 1.0, key="pbl_hp", label_visibility="collapsed")
 
     # 7. 混凝土弹模
     st.markdown(label_html("混凝土弹模", "E", "c", "GPa"), unsafe_allow_html=True)
@@ -236,7 +236,7 @@ with col2:
 with col3:
     # 9. 贯穿钢筋直径
     st.markdown(label_html("钢筋直径", "d", "r", "mm"), unsafe_allow_html=True)
-    d_r = st.number_input("ds_val", 0.0, 32.0, 20.0, 1.0, key="pbl_ds", label_visibility="collapsed")
+    dr = st.number_input("ds_val", 0.0, 32.0, 20.0, 1.0, key="pbl_ds", label_visibility="collapsed")
 
     # 10. 试验类型 (直接把 Test Type 放在符号位)
     st.markdown(label_html("试验类型", "<span style='font-style:normal;'>Test Type</span>", "", ""), unsafe_allow_html=True)
@@ -249,7 +249,7 @@ with col3:
 st.write("---")
 # 计算按钮
 if st.button("计算抗剪承载力"):
-    X = np.array([[dp, n_p, t, h_p, fyp, Ec, fcu, d_r, fyr, Test_Type, Bearing_Flag]])
+    X = np.array([[dp, np, t, hp, fyp, Ec, fcu, dr, fyr, Test_Type, Bearing_Flag]])
     y_pred = PBL_model.predict(X)[0]
     
     st.success(f"预测抗剪承载力: {y_pred:.2f} kN")
