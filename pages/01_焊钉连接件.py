@@ -232,7 +232,7 @@ with col2:
     # 只有是群钉模型时才显示的参数
     if model_type == "群钉模型":
         st.markdown(label_html("纵向间距", "l", "z", "mm"), unsafe_allow_html=True)
-        lz = st.number_input("lz_v", 0.0, 400.0, 100.0, key="lz_k", label_visibility="collapsed")
+        lz = st.number_input("lz_v", 0.0, 500.0, 100.0, key="lz_k", label_visibility="collapsed")
 
         st.markdown(label_html("焊钉层数", "n", "z", ""), unsafe_allow_html=True)
         nz = st.number_input("nz_v", 0.0, 30.0, 2.0, key="nz_k", label_visibility="collapsed")
@@ -244,7 +244,7 @@ with col2:
 with col3:
     if model_type == "群钉模型":
         st.markdown(label_html("横向间距", "l", "h", "mm"), unsafe_allow_html=True)
-        lh = st.number_input("lh_v", 0.0, 400.0, 80.0, key="lh_k", label_visibility="collapsed")
+        lh = st.number_input("lh_v", 0.0, 500.0, 80.0, key="lh_k", label_visibility="collapsed")
 
         st.markdown(label_html("焊钉列数", "n", "h", ""), unsafe_allow_html=True)
         nh = st.number_input("nh_v", 0.0, 30.0, 2.0, key="nh_k", label_visibility="collapsed")
