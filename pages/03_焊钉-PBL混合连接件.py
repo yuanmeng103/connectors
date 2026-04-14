@@ -248,7 +248,16 @@ st.write("---")
 
 # 计算按钮
 if st.button("计算抗剪承载力"):
-    X = np.array([[ds, hs, dp, hp, dr, n, hsp, lsp, n_p, fcu, fyr, Bearing_Flag]])
-    y_pred = stud_PBL_model.predict(X)[0]
+    # 测试 1：输入 0 时的预测
+    X_0 = np.array([[ds, hs, dp, hp, dr, n, hsp, lsp, n_p, fcu, fyr, 0.0]])
+    res_0 = stud_PBL_model.predict(X_0)[0]
     
-    st.success(f"预测抗剪承载力: {y_pred:.2f} kN")
+    # 测试 2：输入 1 时的预测
+    X_1 = np.array([[ds, hs, dp, hp, dr, n, hsp, lsp, n_p, fcu, fyr, 1.0]])
+    res_1 = stud_PBL_model.predict(X_1)[0]
+    
+    st.write(f"调试：强制不承压结果 = {res_0:.4f}")
+    st.write(f"调试：强制承压结果 = {res_1:.4f}")
+    
+    if res_0 == res_1:
+        st.error("警告：模型对该特征输出完全一致，请检查特征顺序或模型版本！")
